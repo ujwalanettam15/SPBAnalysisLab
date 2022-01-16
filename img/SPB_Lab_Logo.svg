@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="255.99998"
+   height="255.99998"
+   viewBox="0 0 67.733328 67.733331"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="SPB_Lab_Logo.svg"
+   inkscape:export-filename="C:\Users\matht\Documents\Northwestern\Research\SPB_AnalysisLab\img\SPB_Lab_Logo.png"
+   inkscape:export-xdpi="30"
+   inkscape:export-ydpi="30"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.7688383"
+     inkscape:cx="94.694919"
+     inkscape:cy="163.94941"
+     inkscape:window-width="1500"
+     inkscape:window-height="930"
+     inkscape:window-x="-6"
+     inkscape:window-y="-6"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     units="px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffd55a;fill-opacity:1;stroke:none;stroke-width:2.63719;stroke-linecap:square;stroke-linejoin:round"
+       id="rect16012"
+       width="67.73333"
+       height="67.73333"
+       x="1.7603238e-06"
+       y="1.7801921e-06" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Javanese Text';-inkscape-font-specification:'Javanese Text';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="3.9626231"
+       y="35.789307"
+       id="text1112-1"><tspan
+         sodipodi:role="line"
+         id="tspan1110-3"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.05556px;font-family:Rubik;-inkscape-font-specification:Rubik;fill:#000000;stroke-width:0.264583"
+         x="3.9626231"
+         y="35.789307">SPB Analysis Lab</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.24666;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 8.5132402,2.4079138 c 16.9852948,32.3722312 33.8864798,31.8295022 50.7077148,0"
+       id="path5945"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.24666;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 8.5132402,65.325418 c 16.9852948,-32.37223 33.8864798,-31.829501 50.7077148,0"
+       id="path5945-6"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>
