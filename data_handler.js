@@ -83,8 +83,6 @@ function parseResults_Pisarenko(lines) {
 		CC_Seebeck.push( { x: Number(line_data[0]), y: Math.abs(Number(line_data[1])) } )	// Get CC and absolute value of Seebeck
 	}
 
-	console.log(CC_Seebeck);
-
 	Pisarenko_Plot_Obj.data.datasets[0].data = CC_Seebeck;
 	Pisarenko_Plot_Obj.update();
 }
