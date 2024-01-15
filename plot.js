@@ -6,8 +6,11 @@ const pisarenko_plot = document.getElementById("Pisarenko_Plot").getContext("2d"
 const mobility_plot = document.getElementById("Mobility_Plot").getContext("2d");
 const zT_plot = document.getElementById("zT_Plot").getContext("2d");
 
-const CC_plot_min = 1E15;
-const CC_plot_max = 1E21;
+const temperature_plot_min = 350;
+const temperature_plot_max = 850;
+//const CC_plot_min = 1E15;
+//const CC_plot_max = 1E21;
+
 
 Chart.defaults.font.family = 'Rubik';
 Chart.defaults.font.size = 16;
@@ -52,11 +55,11 @@ var Pisarenko_Plot_Obj = new Chart(pisarenko_plot, {
 			x: {
 				title: {
 					display: true,
-					text: 'Hall Carrier Concentration (cm\u00B3)'
+					text: 'Temperature (cm\u00B3)'
 				},
 				type: 'logarithmic',
-				min: CC_plot_min,
-				max: CC_plot_max,
+				min: temperature_plot_min,
+				max: temperature_plot_max,
 				ticks: {
 					stepSize: 100  // Doesn't do anything lol
 				}
@@ -80,6 +83,7 @@ var Pisarenko_Plot_Obj = new Chart(pisarenko_plot, {
 
 
 // Mobility plot
+//min and max values changed from hcc to temp
 var Mobility_Plot_Obj = new Chart(mobility_plot, {
 	type: "line",
 	data: {
@@ -119,11 +123,11 @@ var Mobility_Plot_Obj = new Chart(mobility_plot, {
 			x: {
 				title: {
 					display: true,
-					text: 'Hall Carrier Concentration (cm\u00B3)'
+					text: 'Temperature (cm\u00B3)'
 				},
 				type: 'logarithmic',
-				min: CC_plot_min,
-				max: CC_plot_max,
+				min: temperature_plot_min,
+				max: temperature_plot_max,
 				ticks: {
 					stepSize: 100  // Doesn't do anything lol
 				}
@@ -192,11 +196,11 @@ var zT_Plot_Obj = new Chart(zT_plot, {
 			x: {
 				title: {
 					display: true,
-					text: 'Hall Carrier Concentration (cm\u00B3)'
+					text: 'Temperature (cm\u00B3)'
 				},
 				type: 'logarithmic',
-				min: CC_plot_min,
-				max: CC_plot_max,
+				min: temperature_plot_min,
+				max: temperature_plot_max,
 				ticks: {
 					stepSize: 10 // Doesn't do anything lol
 				},
@@ -228,8 +232,10 @@ var zT_Plot_Obj = new Chart(zT_plot, {
 var effective_mass_slider = document.querySelector("#EffMassSlider");
 var effective_mass_slider_output = document.querySelector("#EffMassSliderValue");
 
-var temperature_slider = document.querySelector("#TemperatureSlider");
-var temperature_slider_output = document.querySelector("#TemperatureSliderValue");
+var hall_cc_slider = document.querySelector("HallCarrierConcentrationSlider");
+var hall_cc_slider_output = document.querySelector("HallCarrierConcentrationSliderValue");
+//var temperature_slider = document.querySelector("#TemperatureSlider");
+//var temperature_slider_output = document.querySelector("#TemperatureSliderValue");
 
 var mobility_slider = document.querySelector("#MobilitySlider");
 var mobility_slider_output = document.querySelector("#MobilitySliderValue");
@@ -238,15 +244,16 @@ var kappa_slider = document.querySelector("#KappaSlider");
 var kappa_slider_output = document.querySelector("#KappaSliderValue");
 
 effective_mass_slider_output.innerHTML = effective_mass_slider.value;
-temperature_slider_output.innerHTML = temperature_slider.value;
+hall_cc_slider_output.innerHTML = hall_cc_slider.value;
+//temperature_slider_output.innerHTML = temperature_slider.value;
 mobility_slider_output.innerHTML = mobility_slider.value;
 kappa_slider_output.innerHTML = kappa_slider.value;
 
 
 function Update_Plots() {
-	Update_Pisarenko(Pisarenko_Plot_Obj, effective_mass_slider.value, temperature_slider.value);
-	Update_Mobility(Mobility_Plot_Obj, effective_mass_slider.value, temperature_slider.value, mobility_slider.value*1E-4);
-	Update_zT(zT_Plot_Obj, effective_mass_slider.value, temperature_slider.value, mobility_slider.value*1E-4, kappa_slider.value);
+	Update_Pisarenko(Pisarenko_Plot_Obj, effective_mass_slider.value, hall_cc_slider.value); // last value: temperature_slider.value replaced with hall_cc_slider.value
+	Update_Mobility(Mobility_Plot_Obj, effective_mass_slider.value, hall_cc_slider.value, mobility_slider.value*1E-4);
+	Update_zT(zT_Plot_Obj, effective_mass_slider.value, hall_cc_slider.value, mobility_slider.value*1E-4, kappa_slider.value);
 }
 
 effective_mass_slider.oninput = function() {
@@ -254,10 +261,17 @@ effective_mass_slider.oninput = function() {
 	Update_Plots();
 }
 
+hall_cc_slider.oninput = function() {
+	hall_cc_slider_output.innerHTML = hall_cc_slider.value;
+	Update_Plots();
+ }
+ 
+/*
 temperature_slider.oninput = function() {
 	temperature_slider_output.innerHTML = temperature_slider.value;
 	Update_Plots();
 }
+*/
 
 mobility_slider.oninput = function() {
 	mobility_slider_output.innerHTML = mobility_slider.value;

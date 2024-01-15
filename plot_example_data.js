@@ -6,8 +6,12 @@ const pisarenko_plot = document.getElementById("Example_Pisarenko_Plot").getCont
 const mobility_plot = document.getElementById("Example_Mobility_Plot").getContext("2d");
 const zT_plot = document.getElementById("Example_zT_Plot").getContext("2d");
 
-const CC_plot_min = 1E15;
-const CC_plot_max = 1E21;
+
+const temperature_plot_min = 350;
+const temperature_plot_max = 850;
+//const CC_plot_min = 1E15;
+//const CC_plot_max = 1E21;
+
 
 /*
 // Plot settings
@@ -125,11 +129,12 @@ var Pisarenko_Example_Plot_Obj = new Chart(pisarenko_plot, {
 			x: {
 				title: {
 					display: true,
-					text: 'Hall Carrier Concentration (cm\u00B3)'
+					text: 'Temperature (K\u00B3)' // 'Hall Carrier Concentration (cm\u00B3)' replaced by temperature
+
 				},
 				type: 'logarithmic',
-				min: CC_plot_min,
-				max: CC_plot_max,
+				min: temperature_plot_min,
+				max: temperature_plot_max,
 				ticks: {
 					stepSize: 100  // Doesn't do anything lol
 				}
@@ -193,11 +198,11 @@ var Mobility_Example_Plot_Obj = new Chart(mobility_plot, {
 			x: {
 				title: {
 					display: true,
-					text: 'Hall Carrier Concentration (cm\u00B3)'
+					text:  'Temperature (K\u00B3)' //temperature changed
 				},
 				type: 'logarithmic',
-				min: CC_plot_min,
-				max: CC_plot_max,
+				min: temperature_plot_min,
+				max: temperature_plot_max,
 				ticks: {
 					stepSize: 100  // Doesn't do anything lol
 				}
@@ -261,11 +266,12 @@ var zT_Example_Plot_Obj = new Chart(zT_plot, {
 			x: {
 				title: {
 					display: true,
-					text: 'Hall Carrier Concentration (cm\u00B3)'
+					text: 'Temperature (K\u00B3)' //hcc changed to temp
+
 				},
 				type: 'logarithmic',
-				min: CC_plot_min,
-				max: CC_plot_max,
+				min: temperature_plot_min,
+				max: temperature_plot_max,
 				ticks: {
 					stepSize: 10 // Doesn't do anything lol
 				},
@@ -307,17 +313,17 @@ kappa_slider_output.innerHTML = kappa_slider.value;
 
 function Update_Example_Plots() {
 	console.log("Updating...");
-	var temperature_selection = document.querySelector("#temperatures");
-	var temperature = Number( temperature_selection.options[temperature_selection.selectedIndex].text.split(" ")[2] );
-	console.log("Selected temp: ", temperature);
-	Update_Pisarenko(Pisarenko_Example_Plot_Obj, effective_mass_slider.value, temperature);
-	Update_Mobility(Mobility_Example_Plot_Obj, effective_mass_slider.value, temperature, mobility_slider.value*1E-4);
-	Update_zT(zT_Example_Plot_Obj, effective_mass_slider.value, temperature, mobility_slider.value*1E-4, kappa_slider.value);
+	var hcc_selection = document.querySelector("#hallcarrierconcentrations");
+   	var hall_carrier_concentration = Number( hcc_selection.options[hcc_selection.selectedIndex].text.split(" ")[2] );
+	console.log("Selected hcc: ", hall_carrier_concentration);
+	Update_Pisarenko(Pisarenko_Example_Plot_Obj, effective_mass_slider.value, hall_carrier_concentration);
+	Update_Mobility(Mobility_Example_Plot_Obj, effective_mass_slider.value, hall_carrier_concentration, mobility_slider.value*1E-4);
+	Update_zT(zT_Example_Plot_Obj, effective_mass_slider.value, hall_carrier_concentration, mobility_slider.value*1E-4, kappa_slider.value);
 
 	// Get relevant data
 	var doi_selection = document.querySelector("#doi-names");
 	var doi_compound_id = doi_selection.options[doi_selection.selectedIndex].value;
-	Plot_Example_Data(doi_compound_id, temperature);
+	Plot_Example_Data(doi_compound_id, hall_carrier_concentration);
 	console.log("Updated");
 }
 
@@ -338,29 +344,30 @@ kappa_slider.oninput = function() {
 
 
 
-function Plot_Example_Data(doi_id, temperature) {
+function Plot_Example_Data(doi_id, hall_carrier_concentration) {
 
 	// Get relevant data
 	var data = csv_data_dict[doi_id];
 	console.log("CSV: ", csv_data_dict);
 	console.log("ID: ", doi_id);
 	console.log("Data: ", data);
-	var doi_temperatures = data["Temperatures"];
+	var doi_temperatures = data["hallcarrierconcentrations"];
 	var doi_seebeck = data["S"];
 	var doi_zT = data["zT"];
 	var doi_mu = data["mu"];
-	var doi_n = data["CC"];
+	var doi_n = data["temperature"]; //need a temperature placeholder here
+
 
 	var doi_seebeck_temp = [];
 	var doi_zT_temp = [];
 	var doi_mu_temp = [];
 	var doi_n_temp = [];
-	for (var i = 0; i < doi_temperatures.length; i++) {
-		if (doi_temperatures[i] === temperature) {
+	for (var i = 0; i < doi_hcc.length; i++) {
+		if (doi_hcc[i] === hall_carrier_concentration) {
 			doi_seebeck_temp.push( Math.abs(doi_seebeck[i])*1E6 );
 			doi_zT_temp.push( doi_zT[i] );
 			doi_mu_temp.push( doi_mu[i]*1E4 );
-			doi_n_temp.push( doi_n[i]*1E-6 );
+			doi_n_temp.push( doi_n[i]*1E-6 ); // doi_n is a temperature identifier, calculation needed for temperature
 		}
 	}
 
