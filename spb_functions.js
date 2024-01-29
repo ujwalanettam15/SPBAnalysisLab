@@ -13,6 +13,20 @@ var fdk2 = [];
 
 var seebeck, seebeck_muVK, hall_factor, lorenz, psi;
 
+$(document).ready(function () {
+    $("#doi-names").change(function () {
+        var value = $(this).val();
+
+        let hcc_options = '';
+        var hall_cc = [300, 400, 500];
+        for (i = 0; i < hall_cc.length; i++) {
+            hcc_options += '<option value="'+hall_cc[i]+'">'+hall_cc[i]+'</option>';
+        }
+        console.log(hcc_options);
+        $("#hall_carrier_concentration").html(hcc_options);
+    });
+});
+
 
 fetch('eta_values/FermiDiracIntegrals.csv')
 .then(function(response) {

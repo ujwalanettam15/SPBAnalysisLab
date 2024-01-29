@@ -8,6 +8,15 @@ const zT_plot = document.getElementById("Example_zT_Plot").getContext("2d");
 
 
 const temperature_plot_min = 350;
+const temperature_plot_first = 400;
+const temperature_plot_second = 450;
+const temperature_plot_third = 500;
+const temperature_plot_fourth = 550;
+const temperature_plot_fifth = 600;
+const temperature_plot_sixth = 650;
+const temperature_plot_seventh = 700;
+const temperature_plot_eigth = 750;
+const temperature_plot_ninth = 800;
 const temperature_plot_max = 850;
 //const CC_plot_min = 1E15;
 //const CC_plot_max = 1E21;
@@ -134,6 +143,15 @@ var Pisarenko_Example_Plot_Obj = new Chart(pisarenko_plot, {
 				},
 				type: 'logarithmic',
 				min: temperature_plot_min,
+				first: temperature_plot_first,
+				second: temperature_plot_second,
+				third: temperature_plot_third,
+				fourth: temperature_plot_fourth, 
+				fifth: temperature_plot_fifth,
+				sixth: temperature_plot_sixth,
+				seventh: temperature_plot_seventh,
+				eigth: temperature_plot_eigth,
+				ninth: temperature_plot_ninth,
 				max: temperature_plot_max,
 				ticks: {
 					stepSize: 100  // Doesn't do anything lol
@@ -202,6 +220,15 @@ var Mobility_Example_Plot_Obj = new Chart(mobility_plot, {
 				},
 				type: 'logarithmic',
 				min: temperature_plot_min,
+				first: temperature_plot_first,
+				second: temperature_plot_second,
+				third: temperature_plot_third,
+				fourth: temperature_plot_fourth, 
+				fifth: temperature_plot_fifth,
+				sixth: temperature_plot_sixth,
+				seventh: temperature_plot_seventh,
+				eigth: temperature_plot_eigth,
+				ninth: temperature_plot_ninth,
 				max: temperature_plot_max,
 				ticks: {
 					stepSize: 100  // Doesn't do anything lol
@@ -271,6 +298,15 @@ var zT_Example_Plot_Obj = new Chart(zT_plot, {
 				},
 				type: 'logarithmic',
 				min: temperature_plot_min,
+				first: temperature_plot_first,
+				second: temperature_plot_second,
+				third: temperature_plot_third,
+				fourth: temperature_plot_fourth, 
+				fifth: temperature_plot_fifth,
+				sixth: temperature_plot_sixth,
+				seventh: temperature_plot_seventh,
+				eigth: temperature_plot_eigth,
+				ninth: temperature_plot_ninth,
 				max: temperature_plot_max,
 				ticks: {
 					stepSize: 10 // Doesn't do anything lol
@@ -294,9 +330,6 @@ var zT_Example_Plot_Obj = new Chart(zT_plot, {
 
 
 
-
-
-
 var effective_mass_slider = document.querySelector("#EffMassSlider");
 var effective_mass_slider_output = document.querySelector("#EffMassSliderValue");
 
@@ -310,15 +343,15 @@ effective_mass_slider_output.innerHTML = effective_mass_slider.value;
 mobility_slider_output.innerHTML = mobility_slider.value;
 kappa_slider_output.innerHTML = kappa_slider.value;
 
-
 function Update_Example_Plots() {
 	console.log("Updating...");
 	var hcc_selection = document.querySelector("#hallcarrierconcentrations");
    	var hall_carrier_concentration = Number( hcc_selection.options[hcc_selection.selectedIndex].text.split(" ")[2] );
+	hall_carrier_concentration.innerHTML = hcc_selection.value;
 	console.log("Selected hcc: ", hall_carrier_concentration);
-	Update_Pisarenko(Pisarenko_Example_Plot_Obj, effective_mass_slider.value, hall_carrier_concentration);
-	Update_Mobility(Mobility_Example_Plot_Obj, effective_mass_slider.value, hall_carrier_concentration, mobility_slider.value*1E-4);
-	Update_zT(zT_Example_Plot_Obj, effective_mass_slider.value, hall_carrier_concentration, mobility_slider.value*1E-4, kappa_slider.value);
+	Update_Pisarenko(Pisarenko_Example_Plot_Obj, effective_mass_slider.value, hcc_selection.value);
+	Update_Mobility(Mobility_Example_Plot_Obj, effective_mass_slider.value, hcc_selection.value, mobility_slider.value*1E-4);
+	Update_zT(zT_Example_Plot_Obj, effective_mass_slider.value, hcc_selection.value, mobility_slider.value*1E-4, kappa_slider.value);
 
 	// Get relevant data
 	var doi_selection = document.querySelector("#doi-names");
@@ -342,16 +375,21 @@ kappa_slider.oninput = function() {
 	Update_Example_Plots();
 }
 
+hcc_selection.oninput = function() {
+	hall_carrier_concentration.innerHTML = hcc_selection.value;
+	Update_Example_Plots();
+}
 
 
-function Plot_Example_Data(doi_id, hall_carrier_concentration) {
+
+function Plot_Example_Data(doi_id, hcc_selection) {
 
 	// Get relevant data
 	var data = csv_data_dict[doi_id];
 	console.log("CSV: ", csv_data_dict);
 	console.log("ID: ", doi_id);
 	console.log("Data: ", data);
-	var doi_temperatures = data["hallcarrierconcentrations"];
+	var doi_hcc = data["hcc_selection"];
 	var doi_seebeck = data["S"];
 	var doi_zT = data["zT"];
 	var doi_mu = data["mu"];
@@ -363,7 +401,7 @@ function Plot_Example_Data(doi_id, hall_carrier_concentration) {
 	var doi_mu_temp = [];
 	var doi_n_temp = [];
 	for (var i = 0; i < doi_hcc.length; i++) {
-		if (doi_hcc[i] === hall_carrier_concentration) {
+		if (doi_hcc[i] === hcc_selection) {
 			doi_seebeck_temp.push( Math.abs(doi_seebeck[i])*1E6 );
 			doi_zT_temp.push( doi_zT[i] );
 			doi_mu_temp.push( doi_mu[i]*1E4 );

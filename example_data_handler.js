@@ -92,7 +92,19 @@ for (var i = 0; i < available_csv_files.length; i++) {
 }
 */
 
-
+$(document).ready(function () {
+	$("#doi-names").change(function () {
+		var value = $(this).val();
+		
+		let temperatures_options = '';
+		var temperatures = [300, 400, 500];
+		for (i = 0; i < temperatures.length; i++) {
+			temperatures_options += '<option value="'+temperatures[i]+'">'+temperatures[i]+'</option>';
+		}
+		console.log(temperatures_options);
+		$("#HCCSlider").html(temperatures_options);
+	});
+});
 
 
 csv_data_dict = {};
@@ -151,7 +163,6 @@ fetch('example_data/StarryData2_Test/Test.csv')
 
 
 })
-
 
 
 

@@ -7,6 +7,15 @@ const mobility_plot = document.getElementById("Mobility_Plot").getContext("2d");
 const zT_plot = document.getElementById("zT_Plot").getContext("2d");
 
 const temperature_plot_min = 350;
+const temperature_plot_first = 400;
+const temperature_plot_second = 450;
+const temperature_plot_third = 500;
+const temperature_plot_fourth = 550;
+const temperature_plot_fifth = 600;
+const temperature_plot_sixth = 650;
+const temperature_plot_seventh = 700;
+const temperature_plot_eigth = 750;
+const temperature_plot_ninth = 800;
 const temperature_plot_max = 850;
 //const CC_plot_min = 1E15;
 //const CC_plot_max = 1E21;
@@ -59,6 +68,15 @@ var Pisarenko_Plot_Obj = new Chart(pisarenko_plot, {
 				},
 				type: 'logarithmic',
 				min: temperature_plot_min,
+				first: temperature_plot_first,
+				second: temperature_plot_second,
+				third: temperature_plot_third,
+				fourth: temperature_plot_fourth, 
+				fifth: temperature_plot_fifth,
+				sixth: temperature_plot_sixth,
+				seventh: temperature_plot_seventh,
+				eigth: temperature_plot_eigth,
+				ninth: temperature_plot_ninth,
 				max: temperature_plot_max,
 				ticks: {
 					stepSize: 100  // Doesn't do anything lol
@@ -127,6 +145,15 @@ var Mobility_Plot_Obj = new Chart(mobility_plot, {
 				},
 				type: 'logarithmic',
 				min: temperature_plot_min,
+				first: temperature_plot_first,
+				second: temperature_plot_second,
+				third: temperature_plot_third,
+				fourth: temperature_plot_fourth, 
+				fifth: temperature_plot_fifth,
+				sixth: temperature_plot_sixth,
+				seventh: temperature_plot_seventh,
+				eigth: temperature_plot_eigth,
+				ninth: temperature_plot_ninth,
 				max: temperature_plot_max,
 				ticks: {
 					stepSize: 100  // Doesn't do anything lol
@@ -200,7 +227,16 @@ var zT_Plot_Obj = new Chart(zT_plot, {
 				},
 				type: 'logarithmic',
 				min: temperature_plot_min,
-				max: temperature_plot_max,
+				first: temperature_plot_first,
+				second: temperature_plot_second,
+				third: temperature_plot_third,
+				fourth: temperature_plot_fourth, 
+				fifth: temperature_plot_fifth,
+				sixth: temperature_plot_sixth,
+				seventh: temperature_plot_seventh,
+				eigth: temperature_plot_eigth,
+				ninth: temperature_plot_ninth,
+				max: temperature_plot_max, 
 				ticks: {
 					stepSize: 10 // Doesn't do anything lol
 				},
