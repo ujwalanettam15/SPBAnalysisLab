@@ -73,7 +73,7 @@ function generate_reader(reader_type) {
 }
 
 
-
+/*
 function parseResults_Pisarenko(lines) {
 
 	var CC_Seebeck = [];
@@ -86,13 +86,26 @@ function parseResults_Pisarenko(lines) {
 	Pisarenko_Plot_Obj.data.datasets[0].data = CC_Seebeck;
 	Pisarenko_Plot_Obj.update();
 }
+*/ 
 
+function parseResults_Pisarenko(lines) {
+	var temp_data = [];
+	for (var line_index = 0; line_index < lines.length; line_index++) {
+		var parse_line = lines[line_index].split(",");
+		var t = Number(parse_line[0]);
+		var hcc = Number(parse_line[1]);
+		var j = Math.abs(Number(parse_line[2]));
+
+		temp_data.push({t : t, hcc: hcc, j:j});
+	}
+	updateGraph(graphData);
+}
 
 
 
 function parseResults_Mobility(lines) {
 
-	var CC_mobility = [];
+	var CC_mobility = []; 
 
 	for (var line_index = 0; line_index < lines.length; line_index++) {
 		line_data = lines[line_index].split(",");
@@ -151,7 +164,21 @@ function dragOverHandler(event) {
 	event.preventDefault();
 }
 
+//check hcc value
+function hcc_slider(hall_cc_value) {
+	var filteredData = this.temperatureData.filter(function(dataPoint) {
+        return dataPoint.hcc === Number(hall_cc_value);
+    });
+	var graphData = filteredData.map(function(dataPoint) {
+        return { x: dataPoint.temperature, y: dataPoint.value };
+    });
+	updateGraph(graphData);
+}
 
-
+//check these two functions 
+function updateGraph(graphData) {
+    Pisarenko_Plot_Obj.data.datasets[0].data = graphData;
+    Pisarenko_Plot_Obj.update();
+}
 
 

@@ -181,8 +181,8 @@
 
 			 <!--changing the temperature slider to the hcc slider -->
 			 <div class="col-md-6 col-sm-6 col-xs-12">      
-				<input type="range" min="1E15" max="1E21" value="1E17" step="1E15" class="slider" id="HCCSlider">
-				<label for="HCCSlider">T = <span id="HCCSliderValue"></span> <cm></cm><3></3></label>
+				<input type="range" min="1E15" max="1E21" value="1E17" step="1E15" class="slider" id="HCCSlider"oninput="hccSliderChanged(this.value)">
+				<label for="HCCSlider">HCC= <span id="HCCSliderValue"></span> cm<sup>-3</sup></label>
 			</div>
 
 
